@@ -100,14 +100,16 @@
   <p class="sub">110 seconds. Each clip is a real driven session captured in headless Chromium — not a mockup.
      Click any thumbnail below to jump to that artifact.</p>
   <video id="v" controls playsinline preload="metadata" poster="media/poster.jpg">
-    <source src="media/rock-tumbler.mp4" type="video/mp4">
+    <source src="media/rock-tumbler.mp4" type="video/mp4; codecs=&quot;avc1.4D401F&quot;">
+    <source src="media/rock-tumbler.webm" type="video/webm; codecs=&quot;vp9&quot;">
     Your browser can't play this video.
     <a href="media/rock-tumbler.mp4">Download it instead.</a>
   </video>
   <p class="vid-note">
-    <span>1280×720 · H.264 · 7.2 MB</span>
+    <span>1280×720 · 110s · H.264 7.2 MB / VP9 5.7 MB</span>
     <span>Captured with <code>harness/record.mjs</code></span>
-    <span><a href="media/rock-tumbler.mp4" download>Download</a></span>
+    <span><a href="media/rock-tumbler.mp4" download>Download MP4</a></span>
+    <span><a href="media/rock-tumbler.webm" download>Download WebM</a></span>
   </p>
 
   <div class="grid" id="grid" style="margin-top:26px"></div>

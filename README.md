@@ -103,7 +103,7 @@ always be argued into.**
 | [`harness/record.mjs`](harness/record.mjs) | Driven video capture and reel stitching |
 | [`harness/lib/serve.mjs`](harness/lib/serve.mjs) | Static server with COOP/COEP and 404 accounting |
 | [`index.html`](index.html) | GitHub Pages showcase — the reel, playable |
-| `media/rock-tumbler.mp4` | 110s reel, ten artifacts, 1280×720 |
+| `media/rock-tumbler.{mp4,webm}` | 110s reel, ten artifacts, 1280×720 — H.264 and VP9 so it plays everywhere, including Chromium builds without proprietary codecs |
 
 ## The artifacts
 
