@@ -15,7 +15,7 @@ browser — *if* someone bothered to open one.
 This repo is that loop, documented end to end, with the harness that runs it
 and a 110-second reel of the ten artifacts after tumbling.
 
-▶ **[Watch the reel](https://kody-w.github.io/rapp-rock-tumbler/)** ·
+▶ **[Watch the showcase](https://kody-w.github.io/rapp-rock-tumbler/)** (3m40s, narrated) ·
 📄 [The pattern](docs/PATTERN.md) ·
 🔬 [Every defect, with numbers](docs/FINDINGS.md) ·
 ✍️ [The ten seed prompts](docs/PROMPTS.md)
@@ -103,7 +103,26 @@ always be argued into.**
 | [`harness/record.mjs`](harness/record.mjs) | Driven video capture and reel stitching |
 | [`harness/lib/serve.mjs`](harness/lib/serve.mjs) | Static server with COOP/COEP and 404 accounting |
 | [`index.html`](index.html) | GitHub Pages showcase — the reel, playable |
-| `media/rock-tumbler.{mp4,webm}` | 110s reel, ten artifacts, 1280×720 — H.264 and VP9 so it plays everywhere, including Chromium builds without proprietary codecs |
+| `media/showcase-1080p.{mp4,webm}` | **Narrated 3m40s showcase**, 1920×1080 — live capture of each app with lower-thirds and voiceover |
+| `media/short-1080x1920.{mp4,webm}` | **Vertical cut, 32s** — Shorts / Reels / TikTok format |
+| `media/rock-tumbler.{mp4,webm}` | Original silent 110s reel, 1280×720 |
+
+## Chapters
+
+| | | |
+|---|---|---|
+| 0:00 | Intro | nine of ten reported success while broken |
+| 0:18 | Apex Driving Simulator | a 7.28° kink at the loop seam |
+| 0:45 | WebGPU Path Tracer | the only one that shipped correct |
+| 1:07 | Fluid & Destruction Sandbox | dead on arrival |
+| 1:24 | Open World Explorer | grass taller than the player |
+| 1:37 | webOS Desktop | the whole UI at x = −1138 |
+| 1:59 | NES Emulator Studio | 2× speed on 120Hz |
+| 2:18 | Browser DAW Studio | exported silence |
+| 2:35 | HyperSheet | text that would not spill |
+| 2:48 | Vector Design Studio | twelve layers named `r` |
+| 3:00 | Self-Writing Game Engine | it rejects its own bad output |
+| 3:18 | Name the measurement | the finding worth keeping |
 
 ## The artifacts
 

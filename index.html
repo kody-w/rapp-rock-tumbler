@@ -35,6 +35,10 @@
   h2+.sub{color:var(--dim);margin:0 0 26px;max-width:72ch}
   video{width:100%;border-radius:12px;border:1px solid var(--line);background:#000;display:block}
   .vid-note{color:var(--dim);font-size:13.5px;margin:12px 2px 0;display:flex;flex-wrap:wrap;gap:8px 20px}
+  .shorts{display:grid;grid-template-columns:1fr 300px;gap:26px;align-items:center;
+    margin-top:34px;padding-top:30px;border-top:1px solid var(--line)}
+  .shorts video{width:300px;border-radius:14px;border:1px solid var(--line);background:#000}
+  @media (max-width:720px){.shorts{grid-template-columns:1fr}.shorts video{width:100%;max-width:300px}}
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:14px;margin-top:8px}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;
     cursor:pointer;transition:border-color .15s,transform .15s;text-align:left;padding:0;color:inherit;font:inherit}
@@ -68,6 +72,15 @@
   th{color:var(--dim);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
   td.num{font-family:var(--mono);white-space:nowrap}
   @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+  /* The sample report and the defects table are intentionally wide. Let them scroll
+     inside their own box rather than making the whole page scroll sideways on a phone. */
+  .scroll-x{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  pre{white-space:pre;max-width:100%}
+  @media (max-width:720px){
+    table{min-width:640px}
+    pre{font-size:11.5px}
+    h1{font-size:clamp(26px,7.4vw,40px)}
+  }
 </style>
 </head>
 <body>
@@ -97,20 +110,38 @@
 
 <section id="reel"><div class="wrap">
   <h2>The ten, after tumbling</h2>
-  <p class="sub">110 seconds. Each clip is a real driven session captured in headless Chromium — not a mockup.
+  <p class="sub">3m40s, narrated. Every clip is a real driven session captured in headless Chromium — not a mockup.
      Click any thumbnail below to jump to that artifact.</p>
-  <video id="v" controls playsinline preload="metadata" poster="media/poster.jpg">
-    <source src="media/rock-tumbler.mp4" type="video/mp4; codecs=&quot;avc1.4D401F&quot;">
-    <source src="media/rock-tumbler.webm" type="video/webm; codecs=&quot;vp9&quot;">
+  <video id="v" controls playsinline preload="metadata" poster="media/showcase-poster.jpg">
+    <source src="media/showcase-1080p.mp4" type="video/mp4; codecs=&quot;avc1.4D401F, mp4a.40.2&quot;">
+    <source src="media/showcase-1080p.webm" type="video/webm; codecs=&quot;vp9, opus&quot;">
     Your browser can't play this video.
-    <a href="media/rock-tumbler.mp4">Download it instead.</a>
+    <a href="media/showcase-1080p.mp4">Download it instead.</a>
   </video>
   <p class="vid-note">
-    <span>1280×720 · 110s · H.264 7.2 MB / VP9 5.7 MB</span>
-    <span>Captured with <code>harness/record.mjs</code></span>
-    <span><a href="media/rock-tumbler.mp4" download>Download MP4</a></span>
-    <span><a href="media/rock-tumbler.webm" download>Download WebM</a></span>
+    <span>1920×1080 · 3m40s · narrated</span>
+    <span>Live capture of each app, driven in headless Chromium</span>
+    <span><a href="media/showcase-1080p.mp4" download>MP4 26 MB</a></span>
+    <span><a href="media/showcase-1080p.webm" download>WebM 16 MB</a></span>
   </p>
+
+  <div class="shorts">
+    <div>
+      <h3 style="font-size:17px;margin:0 0 6px">Vertical cut &mdash; 32s</h3>
+      <p style="color:var(--dim);font-size:13.5px;margin:0 0 12px;max-width:52ch">
+        Same story, built for Shorts / Reels / TikTok. 1080&times;1920, hook in
+        the first two seconds, six defects, one punchline.
+      </p>
+      <p class="vid-note" style="margin-top:10px">
+        <span><a href="media/short-1080x1920.mp4" download>MP4 2.8 MB</a></span>
+        <span><a href="media/short-1080x1920.webm" download>WebM 2.3 MB</a></span>
+      </p>
+    </div>
+    <video controls playsinline preload="none" poster="media/short-poster.jpg">
+      <source src="media/short-1080x1920.mp4" type="video/mp4; codecs=&quot;avc1.4D401F, mp4a.40.2&quot;">
+      <source src="media/short-1080x1920.webm" type="video/webm; codecs=&quot;vp9, opus&quot;">
+    </video>
+  </div>
 
   <div class="grid" id="grid" style="margin-top:26px"></div>
 </div></section>
@@ -132,7 +163,7 @@
 <section><div class="wrap">
   <h2>What the report looks like</h2>
   <p class="sub">Every line below is a real finding from the session this repo documents.</p>
-<pre><span class="c">$ node harness/tumble.mjs ./site index.html</span>
+<div class="scroll-x"><pre><span class="c">$ node harness/tumble.mjs ./site index.html</span>
 
 === TUMBLE  index.html ===
 http status        200
@@ -142,7 +173,7 @@ doc vs viewport    <span class="w">3200px vs 1600px</span>   <span class="w">&lt
 dominant colour    <span class="w">0.47</span> of frame is rgb(187,204,204)   <span class="w">&lt;-- a flat slab fills the view</span>
 pageerrors         0
 console errors     0   (server 404s seen: /favicon.ico)
-</pre>
+</pre></div>
 </div></section>
 
 <section><div class="wrap">
@@ -170,7 +201,7 @@ console errors     0   (server 404s seen: /favicon.ico)
 <section><div class="wrap">
   <h2>A few of the defects</h2>
   <p class="sub">None of these were reachable by <code>node --check</code>, a linter, jsdom, or by asking the author.</p>
-  <table>
+  <div class="scroll-x"><table>
     <tr><th>Artifact</th><th>Defect</th><th>The measurement</th></tr>
     <tr><td>Fluid Sandbox</td><td>Dead on arrival — black screen</td><td class="num"><code>sampler3D</code> has no default precision in GLSL ES 3.00</td></tr>
     <tr><td>Browser DAW</td><td>Every bounce exported silence</td><td class="num">RMS 0.0000 → <span style="color:var(--good)">0.0419</span>, peak → 0.9446</td></tr>
@@ -182,17 +213,17 @@ console errors     0   (server 404s seen: /favicon.ico)
     <tr><td>Open World</td><td>Grass taller than the player</td><td class="num">44–152% → <span style="color:var(--good)">11–23%</span> of player height</td></tr>
     <tr><td>Vector Studio</td><td>Twelve layers all named <code>r</code></td><td class="num">hardcoded <code>name:'r'</code> + no auto-naming</td></tr>
     <tr><td>Hypersheet</td><td>Text clipped instead of spilling</td><td class="num">40 years of Excel muscle memory, in no spec</td></tr>
-  </table>
+  </table></div>
 </div></section>
 
 <section><div class="wrap">
   <h2>Run it yourself</h2>
-<pre>git clone https://github.com/kody-w/rapp-rock-tumbler
+<div class="scroll-x"><pre>git clone https://github.com/kody-w/rapp-rock-tumbler
 cd rapp-rock-tumbler/harness
 npm install
 npx playwright install chromium
 
-node tumble.mjs /path/to/your/site index.html --seconds 9</pre>
+node tumble.mjs /path/to/your/site index.html --seconds 9</pre></div>
   <p style="color:var(--dim);margin-top:22px">
     It also ships as a hatchable RAPP method twin carrying the eight rules, 23 diagnostic
     facts, and two runnable agents —
@@ -209,24 +240,24 @@ node tumble.mjs /path/to/your/site index.html --seconds 9</pre>
 
 <script>
 const APPS = [
-  ["Apex Driving Simulator","vs Gran Turismo 7 — spline kink: 7.28° vs 0.378° median"],
-  ["WebGPU Path Tracer","vs Blender Cycles — furnace test, 0.49% energy error"],
-  ["Fluid Destruction Sandbox","vs Teardown — shipped dead: sampler3D precision"],
-  ["Open World Explorer","vs Breath of the Wild — grass was 152% of player height"],
-  ["WebOS Desktop","vs macOS — ls | grep txt | wc -l returned 1, not 2"],
-  ["NES Emulator Studio","vs Mesen — 2× speed at 120Hz; self-test said 4 FAILED"],
-  ["Browser DAW Studio","vs Ableton Live — bounced silence; now RMS 0.0419"],
-  ["Hypersheet","vs Excel — text clipped instead of spilling"],
-  ["Vector Design Studio","vs Figma — twelve layers all named \u0022r\u0022"],
-  ["Self-Writing Game Engine","verifies itself — 85% skilled vs 0% random"],
+  ["Apex Driving Simulator","vs Gran Turismo 7 — spline kink: 7.28° vs 0.378° median",18.0],
+  ["WebGPU Path Tracer","vs Blender Cycles — furnace test, 0.49% energy error",45.5],
+  ["Fluid Destruction Sandbox","vs Teardown — shipped dead: sampler3D precision",67.8],
+  ["Open World Explorer","vs Breath of the Wild — grass was 152% of player height",84.0],
+  ["WebOS Desktop","vs macOS — ls | grep txt | wc -l returned 1, not 2",97.6],
+  ["NES Emulator Studio","vs Mesen — 2× speed at 120Hz; self-test said 4 FAILED",119.9],
+  ["Browser DAW Studio","vs Ableton Live — bounced silence; now RMS 0.0419",138.6],
+  ["Hypersheet","vs Excel — text clipped instead of spilling",155.0],
+  ["Vector Design Studio","vs Figma — twelve layers all named \u0022r\u0022",168.9],
+  ["Self-Writing Game Engine","verifies itself — 85% skilled vs 0% random",180.2],
 ];
-const SEG = 11;                       // seconds per clip in the reel
+// Chapter marks measured from the built segments, since narration length varies per app.
 const grid = document.getElementById('grid');
 const v = document.getElementById('v');
-APPS.forEach(([name, note], i) => {
+APPS.forEach(([name, note, at], i) => {
   const b = document.createElement('button');
   b.className = 'card'; b.type = 'button';
-  b.setAttribute('aria-label', `Play ${name} — starts at ${i * SEG} seconds`);
+  b.setAttribute('aria-label', `Play ${name} — starts at ${Math.round(at)} seconds`);
   b.innerHTML =
     `<img src="media/still-${i + 1}.jpg" alt="" loading="lazy" width="640" height="360">` +
     `<div class="meta"><div class="n">${String(i + 1).padStart(2,'0')} / 10</div>` +
@@ -234,7 +265,7 @@ APPS.forEach(([name, note], i) => {
   b.querySelector('h3').textContent = name;
   b.querySelector('p').textContent = note;
   b.addEventListener('click', () => {
-    v.currentTime = i * SEG;
+    v.currentTime = at;
     v.play().catch(() => {});
     v.scrollIntoView({ behavior: 'smooth', block: 'center' });
   });
