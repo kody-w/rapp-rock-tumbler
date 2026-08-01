@@ -1,0 +1,4 @@
+[
+  { "file": "demos/app-one.html",  "main": "App One",  "sub": "vs Some Product — what the critic measured", "drive": "drivers/app-one.mjs" },
+  { "file": "demos/app-two.html",  "main": "App Two",  "sub": "vs Other Product — the number that closed it" }
+]

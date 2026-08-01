@@ -1,0 +1,6 @@
+node_modules/
+tumble-out/
+video/raw/
+video/seg/
+video/list.txt
+.DS_Store

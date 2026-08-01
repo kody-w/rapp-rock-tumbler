@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RAPP Rock Tumbler — an agent's report of success is not evidence of success</title>
+<meta name="description" content="Ten single-file browser apps built by fan-out sub-agents. Nine reported success while broken. The adversarial verification loop that found every defect, documented end to end, with a 110-second reel.">
+<meta property="og:title" content="RAPP Rock Tumbler">
+<meta property="og:description" content="Ten apps. Ten self-reports of success. Nine still broken. Here is the loop that caught them.">
+<meta property="og:image" content="https://kody-w.github.io/rapp-rock-tumbler/media/poster.jpg">
+<meta property="og:type" content="website">
+<style>
+  :root{
+    --bg:#0a0d12; --panel:#121722; --line:#1e2634; --ink:#e8edf5;
+    --dim:#8fa0b8; --accent:#50b4ff; --warn:#ffcc66; --good:#5fd39a; --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+  header{padding:72px 0 40px;border-bottom:1px solid var(--line)}
+  .eyebrow{font:600 12px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
+  h1{font-size:clamp(30px,5.2vw,52px);line-height:1.1;margin:0 0 20px;letter-spacing:-.02em}
+  h1 em{font-style:normal;color:var(--accent)}
+  .lede{font-size:clamp(17px,2.2vw,20px);color:var(--dim);max-width:70ch;margin:0}
+  .stat-row{display:flex;flex-wrap:wrap;gap:12px;margin:34px 0 0}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 18px;min-width:132px}
+  .stat b{display:block;font:700 27px/1.15 var(--mono);color:var(--ink)}
+  .stat span{font-size:12.5px;color:var(--dim)}
+  .stat.bad b{color:var(--warn)} .stat.good b{color:var(--good)}
+  section{padding:56px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:26px;margin:0 0 8px;letter-spacing:-.01em}
+  h2+.sub{color:var(--dim);margin:0 0 26px;max-width:72ch}
+  video{width:100%;border-radius:12px;border:1px solid var(--line);background:#000;display:block}
+  .vid-note{color:var(--dim);font-size:13.5px;margin:12px 2px 0;display:flex;flex-wrap:wrap;gap:8px 20px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:14px;margin-top:8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;
+    cursor:pointer;transition:border-color .15s,transform .15s;text-align:left;padding:0;color:inherit;font:inherit}
+  .card:hover,.card:focus-visible{border-color:var(--accent);transform:translateY(-2px);outline:none}
+  .card img{width:100%;display:block;aspect-ratio:16/9;object-fit:cover;background:#000}
+  .card .meta{padding:11px 13px 14px}
+  .card .n{font:600 11px/1 var(--mono);color:var(--accent);letter-spacing:.1em}
+  .card h3{font-size:14.5px;margin:7px 0 5px;line-height:1.3}
+  .card p{margin:0;font-size:12.5px;color:var(--dim);line-height:1.45}
+  ol.loop{counter-reset:s;list-style:none;padding:0;margin:0;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(292px,1fr));gap:13px}
+  ol.loop li{counter-increment:s;background:var(--panel);border:1px solid var(--line);
+    border-radius:10px;padding:17px 19px 18px 52px;position:relative;font-size:14.5px;color:var(--dim)}
+  ol.loop li::before{content:counter(s);position:absolute;left:18px;top:16px;
+    font:700 15px/1 var(--mono);color:var(--accent)}
+  ol.loop b{color:var(--ink);font-weight:600;display:block;margin-bottom:3px}
+  pre{background:#080b10;border:1px solid var(--line);border-radius:10px;padding:17px 19px;
+    overflow-x:auto;font:13px/1.65 var(--mono);color:#c9d6e6;margin:0}
+  pre .c{color:#5f7288} pre .w{color:var(--warn)} pre .g{color:var(--good)}
+  blockquote{margin:0;padding:22px 26px;background:linear-gradient(90deg,rgba(80,180,255,.10),transparent);
+    border-left:3px solid var(--accent);border-radius:0 10px 10px 0;font-size:18px;color:var(--ink)}
+  .links{display:flex;flex-wrap:wrap;gap:11px;margin-top:28px}
+  .btn{display:inline-block;padding:11px 19px;border-radius:9px;border:1px solid var(--line);
+    background:var(--panel);color:var(--ink);text-decoration:none;font-size:14.5px;transition:border-color .15s}
+  .btn:hover{border-color:var(--accent)}
+  .btn.pri{background:var(--accent);color:#03121f;border-color:var(--accent);font-weight:600}
+  footer{padding:44px 0 72px;color:var(--dim);font-size:13.5px}
+  a{color:var(--accent)}
+  table{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--dim);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+  td.num{font-family:var(--mono);white-space:nowrap}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header><div class="wrap">
+  <div class="eyebrow">RAPP · Rock Tumbler</div>
+  <h1>An agent's report of success is <em>not evidence of success</em>.</h1>
+  <p class="lede">
+    Ten ambitious single-file browser applications, each benchmarked against a named
+    commercial product, each built by fanning out sub-agents. Every sub-agent ran its own
+    checks. Every sub-agent reported success. Nine of the ten were still broken.
+  </p>
+  <div class="stat-row">
+    <div class="stat"><b>10</b><span>artifacts built</span></div>
+    <div class="stat bad"><b>9</b><span>broken after self-verification</span></div>
+    <div class="stat"><b>0</b><span>defects a linter could see</span></div>
+    <div class="stat good"><b>1</b><span>prompt with a fail condition</span></div>
+    <div class="stat good"><b>1</b><span>correct on the first try</span></div>
+  </div>
+  <div class="links">
+    <a class="btn pri" href="#reel">▶ Watch the reel</a>
+    <a class="btn" href="https://github.com/kody-w/rapp-rock-tumbler/blob/main/docs/PATTERN.md">The pattern</a>
+    <a class="btn" href="https://github.com/kody-w/rapp-rock-tumbler/blob/main/docs/FINDINGS.md">Every defect, with numbers</a>
+    <a class="btn" href="https://github.com/kody-w/rapp-rock-tumbler">Source</a>
+  </div>
+</div></header>
+
+<section id="reel"><div class="wrap">
+  <h2>The ten, after tumbling</h2>
+  <p class="sub">110 seconds. Each clip is a real driven session captured in headless Chromium — not a mockup.
+     Click any thumbnail below to jump to that artifact.</p>
+  <video id="v" controls playsinline preload="metadata" poster="media/poster.jpg">
+    <source src="media/rock-tumbler.mp4" type="video/mp4">
+    Your browser can't play this video.
+    <a href="media/rock-tumbler.mp4">Download it instead.</a>
+  </video>
+  <p class="vid-note">
+    <span>1280×720 · H.264 · 7.2 MB</span>
+    <span>Captured with <code>harness/record.mjs</code></span>
+    <span><a href="media/rock-tumbler.mp4" download>Download</a></span>
+  </p>
+
+  <div class="grid" id="grid" style="margin-top:26px"></div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>The loop</h2>
+  <p class="sub">Seven steps. Each exists because a specific bug got past everything else.</p>
+  <ol class="loop">
+    <li><b>Serve over HTTP</b>Never <code>file://</code> — OPFS, workers and ES modules all fail silently there and give you false failures.</li>
+    <li><b>Launch a real browser</b>With GPU flags. Without them WebGL and WebGPU quietly fall back and you find bugs that only exist in your harness.</li>
+    <li><b>Capture every error</b>Then <em>identify</em> each one before dismissing it. A bare test server's own <code>/favicon.ico</code> 404 will masquerade as an app defect.</li>
+    <li><b>Drive the app</b>Click the start gate. Press the keys. Open the tab nobody opens. Run the app's own self-test if it ships one.</li>
+    <li><b>Measure from outside the page</b>Screenshot to PNG and compute over the pixels yourself. Page-side code can tell you whatever it likes; a PNG cannot.</li>
+    <li><b>Return a number, not an adjective</b>"The road is green" gets argued with. "Road RGB [90,102,70] at 0.316 saturation" gets fixed.</li>
+    <li><b>Loop, then re-sweep</b>Fixes break other things. Re-run the whole pass after every change.</li>
+  </ol>
+</div></section>
+
+<section><div class="wrap">
+  <h2>What the report looks like</h2>
+  <p class="sub">Every line below is a real finding from the session this repo documents.</p>
+<pre><span class="c">$ node harness/tumble.mjs ./site index.html</span>
+
+=== TUMBLE  index.html ===
+http status        200
+canvases/buttons   1 / 24
+scrollX/scrollY    <span class="w">-1138</span> / 0   <span class="w">&lt;-- document scrolled; suspect an unclipped oversized child</span>
+doc vs viewport    <span class="w">3200px vs 1600px</span>   <span class="w">&lt;-- horizontally scrollable</span>
+dominant colour    <span class="w">0.47</span> of frame is rgb(187,204,204)   <span class="w">&lt;-- a flat slab fills the view</span>
+pageerrors         0
+console errors     0   (server 404s seen: /favicon.ico)
+</pre>
+</div></section>
+
+<section><div class="wrap">
+  <h2>The single most useful result</h2>
+  <blockquote>
+    Of the ten applications, <strong>exactly one shipped correct on the first attempt with
+    zero correction loops.</strong> It was also the only one whose prompt contained an
+    objective, self-administered fail condition.
+  </blockquote>
+  <p style="color:var(--dim);max-width:74ch;margin-top:22px">
+    The WebGPU path tracer was told: <em>run the white furnace test — put the camera inside a
+    uniformly emitting sphere with albedo 1.0; every pixel must return exactly the emitter's
+    radiance; if energy error exceeds 1%, your integrator is wrong.</em> It came back at
+    <strong style="color:var(--good)">0.49%</strong> and it was telling the truth.
+  </p>
+  <p style="color:var(--dim);max-width:74ch">
+    The other nine were graded on <em>"make it AAA quality."</em> All nine reported success
+    while broken — not maliciously, but because a subjective bar can always be argued into.
+  </p>
+  <blockquote style="margin-top:24px">
+    If you can name the measurement, put it in the prompt, not in the review.
+  </blockquote>
+</div></section>
+
+<section><div class="wrap">
+  <h2>A few of the defects</h2>
+  <p class="sub">None of these were reachable by <code>node --check</code>, a linter, jsdom, or by asking the author.</p>
+  <table>
+    <tr><th>Artifact</th><th>Defect</th><th>The measurement</th></tr>
+    <tr><td>Fluid Sandbox</td><td>Dead on arrival — black screen</td><td class="num"><code>sampler3D</code> has no default precision in GLSL ES 3.00</td></tr>
+    <tr><td>Browser DAW</td><td>Every bounce exported silence</td><td class="num">RMS 0.0000 → <span style="color:var(--good)">0.0419</span>, peak → 0.9446</td></tr>
+    <tr><td>NES Emulator</td><td>2× speed on 120Hz displays</td><td class="num">1200 → <span style="color:var(--good)">599</span> frames per 10 s</td></tr>
+    <tr><td>NES Emulator</td><td>Its own self-test tab, never clicked</td><td class="num">4 FAILED / 26 → <span style="color:var(--good)">26/26</span></td></tr>
+    <tr><td>WebOS Desktop</td><td>Whole desktop displaced</td><td class="num">x = −1138 with <code>transform:none</code> ⇒ a scroll</td></tr>
+    <tr><td>WebOS Desktop</td><td>Terminal had no notion of a pipe</td><td class="num"><code>ls|grep txt|wc -l</code> → 1, should be <span style="color:var(--good)">2</span></td></tr>
+    <tr><td>Driving Sim</td><td>Spline not C1-continuous at its seam</td><td class="num">7.28° vs 0.378° median → <span style="color:var(--good)">2.12°</span></td></tr>
+    <tr><td>Open World</td><td>Grass taller than the player</td><td class="num">44–152% → <span style="color:var(--good)">11–23%</span> of player height</td></tr>
+    <tr><td>Vector Studio</td><td>Twelve layers all named <code>r</code></td><td class="num">hardcoded <code>name:'r'</code> + no auto-naming</td></tr>
+    <tr><td>Hypersheet</td><td>Text clipped instead of spilling</td><td class="num">40 years of Excel muscle memory, in no spec</td></tr>
+  </table>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Run it yourself</h2>
+<pre>git clone https://github.com/kody-w/rapp-rock-tumbler
+cd rapp-rock-tumbler/harness
+npm install
+npx playwright install chromium
+
+node tumble.mjs /path/to/your/site index.html --seconds 9</pre>
+  <p style="color:var(--dim);margin-top:22px">
+    It also ships as a hatchable RAPP method twin carrying the eight rules, 23 diagnostic
+    facts, and two runnable agents —
+    <a href="https://github.com/kody-w/rapp-egg-hub">rapp-egg-hub</a>.
+  </p>
+</div></section>
+
+<footer><div class="wrap">
+  Artifacts: <a href="https://github.com/kody-w/localFirstTools">localFirstTools</a> ·
+  Write-ups: <a href="https://kody-w.github.io/learnwithkody/examples/">learnwithkody/examples</a> ·
+  Twin: <a href="https://github.com/kody-w/rapp-egg-hub">rapp-egg-hub</a> ·
+  MIT licensed
+</div></footer>
+
+<script>
+const APPS = [
+  ["Apex Driving Simulator","vs Gran Turismo 7 — spline kink: 7.28° vs 0.378° median"],
+  ["WebGPU Path Tracer","vs Blender Cycles — furnace test, 0.49% energy error"],
+  ["Fluid Destruction Sandbox","vs Teardown — shipped dead: sampler3D precision"],
+  ["Open World Explorer","vs Breath of the Wild — grass was 152% of player height"],
+  ["WebOS Desktop","vs macOS — ls | grep txt | wc -l returned 1, not 2"],
+  ["NES Emulator Studio","vs Mesen — 2× speed at 120Hz; self-test said 4 FAILED"],
+  ["Browser DAW Studio","vs Ableton Live — bounced silence; now RMS 0.0419"],
+  ["Hypersheet","vs Excel — text clipped instead of spilling"],
+  ["Vector Design Studio","vs Figma — twelve layers all named \u0022r\u0022"],
+  ["Self-Writing Game Engine","verifies itself — 85% skilled vs 0% random"],
+];
+const SEG = 11;                       // seconds per clip in the reel
+const grid = document.getElementById('grid');
+const v = document.getElementById('v');
+APPS.forEach(([name, note], i) => {
+  const b = document.createElement('button');
+  b.className = 'card'; b.type = 'button';
+  b.setAttribute('aria-label', `Play ${name} — starts at ${i * SEG} seconds`);
+  b.innerHTML =
+    `<img src="media/still-${i + 1}.jpg" alt="" loading="lazy" width="640" height="360">` +
+    `<div class="meta"><div class="n">${String(i + 1).padStart(2,'0')} / 10</div>` +
+    `<h3></h3><p></p></div>`;
+  b.querySelector('h3').textContent = name;
+  b.querySelector('p').textContent = note;
+  b.addEventListener('click', () => {
+    v.currentTime = i * SEG;
+    v.play().catch(() => {});
+    v.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+  grid.appendChild(b);
+});
+</script>
+</body>
+</html>

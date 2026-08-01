@@ -1,0 +1,16 @@
+{
+  "name": "rock-tumbler-harness",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Run an HTML artifact in a real browser and hand back numbers.",
+  "scripts": {
+    "tumble": "node tumble.mjs",
+    "record": "node record.mjs",
+    "postinstall": "echo 'Now run: npx playwright install chromium'"
+  },
+  "dependencies": {
+    "playwright-core": "^1.48.0",
+    "pngjs": "^7.0.0"
+  }
+}
